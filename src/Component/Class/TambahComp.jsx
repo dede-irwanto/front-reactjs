@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import {
+  Alert,
   Button,
   Col,
   Container,
@@ -21,6 +22,7 @@ class TambahComp extends Component {
       nama: "",
       jurusan: "",
       response: "",
+      display: "none",
     };
   }
 
@@ -39,6 +41,12 @@ class TambahComp extends Component {
         if (json.data.status === 200) {
           this.setState({
             response: json.data.values,
+            display: "block",
+          });
+        } else {
+          this.setState({
+            response: json.data.values,
+            display: "block",
           });
         }
       });
@@ -49,6 +57,9 @@ class TambahComp extends Component {
       <div>
         <Container>
           <h4 className="mt-3">Form Tambah Data</h4>
+          <Alert color="success" style={{ display: this.state.display }}>
+            {this.state.response}
+          </Alert>
           <Form className="form">
             <Col>
               <Label>NIM</Label>
