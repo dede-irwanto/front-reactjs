@@ -24,6 +24,9 @@ const NavbarComp = () => {
             <NavItem>
               <NavLink href="/about/">About</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href="/mahasiswa/">Mahasiswa</NavLink>
+            </NavItem>
           </Nav>
           <NavbarText>Dede Irwanto</NavbarText>
         </Collapse>
