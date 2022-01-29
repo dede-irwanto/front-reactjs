@@ -11,7 +11,7 @@ import {
   Label,
   Row,
 } from "reactstrap";
-const api = "http://localhost:3001/";
+const api = "http://localhost:3001";
 
 class TambahComp extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class TambahComp extends Component {
 
   addMahasiswa = () => {
     axios
-      .post(api + "tambah", {
+      .post(api + "/tambah", {
         nim: this.state.nim,
         nama: this.state.nama,
         jurusan: this.state.jurusan,
