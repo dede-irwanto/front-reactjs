@@ -9,7 +9,6 @@ const api = "http://localhost:3001";
 class ListComp extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       mahasiswa: [],
       response: "",
