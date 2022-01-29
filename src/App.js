@@ -2,11 +2,11 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import EditComp from "./Component/Class/EditComp";
 import ListComp from "./Component/Class/ListComp";
-import TambahComp from "./Component/Class/TambahComp";
 import About from "./Component/Fungsional/AboutComp";
 import DetailComp from "./Component/Fungsional/DetailComp";
 import HomePage from "./Component/Fungsional/HomePage";
 import NavbarComp from "./Component/Fungsional/NavbarComp";
+import TambahComp from "./Component/Fungsional/TambahComp";
 
 function App() {
   return (
