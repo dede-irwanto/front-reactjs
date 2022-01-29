@@ -13,23 +13,27 @@ import {
   Row,
 } from "reactstrap";
 import qs from "querystring";
-import { useLocation } from "react-router-dom";
+
+import { withRouter } from "react-router";
 
 const api = "http://localhost:3001";
+
 class EditComp extends Component {
   constructor(props) {
     super(props);
-
-    const location = useLocation;
-    const { id_mahasiswa, nim, nama, jurusan } = location.state;
     this.state = {
-      id_mahasiswa: id_mahasiswa,
-      nim: nim,
-      nama: nama,
-      jurusan: jurusan,
+      mahasiswa: [],
       response: "",
       display: "none",
     };
+  }
+
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.fetchData(id);
+    axios.get(api + "/tampil/").then((res) => {
+      this.setState({ mahasiswa: res.data.values[0] });
+    });
   }
 
   handleChange = () => {
@@ -58,7 +62,6 @@ class EditComp extends Component {
       }
     });
   };
-
   render() {
     return (
       <div>
