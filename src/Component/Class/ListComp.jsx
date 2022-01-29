@@ -1,6 +1,7 @@
 import axios from "axios";
 import qs from "querystring";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Table, Button, Container, NavLink } from "reactstrap";
 
 const api = "http://localhost:3001";
@@ -48,7 +49,21 @@ class ListComp extends Component {
                   <td>{mahasiswa.nim}</td>
                   <td>{mahasiswa.nama}</td>
                   <td>{mahasiswa.jurusan}</td>
-                  <td>Edit | Hapus</td>
+                  <td>
+                    <Link
+                      to={{
+                        pathname: `/mahasiswa/edit/${mahasiswa.id_mahasiswa}`,
+                      }}
+                      state={{
+                        id_mahasiswa: mahasiswa.id_mahasiswa,
+                        nim: mahasiswa.nim,
+                        nama: mahasiswa.nama,
+                        jurusan: mahasiswa.jurusan,
+                      }}
+                    >
+                      <Button>Edit</Button>
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
