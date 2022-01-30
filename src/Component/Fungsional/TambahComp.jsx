@@ -20,10 +20,9 @@ const TambahComp = () => {
   const [nim, setNim] = useState("");
   const [nama, setNama] = useState("");
   const [jurusan, setJurusan] = useState("");
-  const [response, setResponse] = useState("");
 
-  // state validation
-  const [validation, setValidation] = useState({});
+  // validation
+  const [validation, setValidation] = useState(new Map());
 
   // history
   const navigate = useNavigate();
@@ -32,36 +31,50 @@ const TambahComp = () => {
   const tambahMahasiswa = async (e) => {
     e.preventDefault();
 
-    // kirim data ke server
-    await axios
-      .post(api + "/tambah", {
-        nim: nim,
-        nama: nama,
-        jurusan: jurusan,
-      })
-      .then((json) => {
-        // redirect
-        navigate("/mahasiswa", {
-          state: {
-            response: json.data.values,
-          },
+    if (nim !== "" && nama !== "" && jurusan !== "") {
+      // kirim data ke server
+      await axios
+        .post(api + "/tambah", {
+          nim: nim,
+          nama: nama,
+          jurusan: jurusan,
+        })
+        .then((json) => {
+          // redirect
+          navigate("/mahasiswa", {
+            state: {
+              message: "Data berhasil ditambahkan!",
+            },
+          });
         });
-      });
+    } else {
+      const errors = [];
+
+      if (nim === "") {
+        errors.push("NIM");
+      }
+      if (nama === "") {
+        errors.push("Nama");
+      }
+      if (jurusan === "") {
+        errors.push("Jurusan");
+      }
+
+      const updateValidation = (k, errors) => {
+        setValidation(new Map(validation.set(k, errors)));
+      };
+    }
   };
 
   return (
     <div>
       <Container>
         <h4 className="mt-3">Form Tambah Data</h4>
-        {validation.errors && (
-          <Alert variant="danger">
-            <ul class="mt-0 mb-0">
-              {validation.errors.map((error, index) => (
-                <li key={index}>{`${error.param} : ${error.msg}`}</li>
-              ))}
-            </ul>
-          </Alert>
-        )}
+        <ul>
+          {[...validation.keys()].map((k) => (
+            <li key={k}>validation.get(k)</li>
+          ))}
+        </ul>
         <Form onSubmit={tambahMahasiswa}>
           <Col>
             <Label>NIM</Label>

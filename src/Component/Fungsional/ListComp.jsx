@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Container, NavLink, Button, Table } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Container, NavLink, Button, Table, Alert } from "reactstrap";
+import { Link, useLocation } from "react-router-dom";
 
 const api = "http://localhost:3001";
 
 const ListComp = () => {
   const [mahasiswa, setMahasiswa] = useState([]);
+
+  const location = useLocation();
 
   useEffect(() => {
     fectData();
@@ -27,6 +29,11 @@ const ListComp = () => {
     <div>
       <Container>
         <h2>Data Mahasiswa</h2>
+        {location.state != null ? (
+          <Alert variant="danger">{location.state.message}</Alert>
+        ) : (
+          ""
+        )}
         <NavLink href="/mahasiswa/tambah">
           <Button color="primary">Tambah Data</Button>
         </NavLink>
